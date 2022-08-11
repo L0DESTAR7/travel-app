@@ -2,30 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:tourisme_app_ma/const/color_const.dart';
 
 class Details extends StatefulWidget {
-  const Details({
-    Key? key,
-    required this.xFactor,
-    required this.yFactor,
-  }) : super(key: key);
+   Details(
+      {Key? key,
+      required this.xFactor,
+      required this.yFactor,
+      required this.stateVar})
+      : super(key: key);
 
   final double xFactor;
   final double yFactor;
+  final bool stateVar;
+  Notification onTap = const SizeChangedLayoutNotification();
 
   @override
   State<Details> createState() => _DetailsState();
 }
 
 class _DetailsState extends State<Details> {
-
   bool isPressed = false;
 
-  void detailsPressed(){
+  void detailsPressed() {
     isPressed = true;
-    setState((){
-
-    });
-    Future.delayed(const Duration(milliseconds: 200),(){
-      setState((){
+    setState(() {});
+    Future.delayed(const Duration(milliseconds: 200), () {
+      setState(() {
         isPressed = false;
       });
     });
@@ -34,8 +34,9 @@ class _DetailsState extends State<Details> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         detailsPressed();
+        widget.onTap.dispatch(context);
       },
       child: Container(
         alignment: Alignment.center,
@@ -45,18 +46,20 @@ class _DetailsState extends State<Details> {
             borderRadius: BorderRadius.circular(17 * widget.yFactor),
             color: const Color(0xFFEFFCFD),
             border: Border.all(color: Colors.white, width: 1),
-            boxShadow: isPressed ? null : [
-              const BoxShadow(
-                color: Color(0x40000000),
-                offset: Offset(2, 2),
-                blurRadius: 3,
-              ),
-              const BoxShadow(
-                color: Color(0xE0FFFFFF),
-                offset: Offset(-2, -2),
-                blurRadius: 4,
-              )
-            ]),
+            boxShadow: isPressed
+                ? null
+                : [
+                    const BoxShadow(
+                      color: Color(0x40000000),
+                      offset: Offset(2, 2),
+                      blurRadius: 3,
+                    ),
+                    const BoxShadow(
+                      color: Color(0xE0FFFFFF),
+                      offset: Offset(-2, -2),
+                      blurRadius: 4,
+                    )
+                  ]),
         child: Text(
           "Détails",
           style: TextStyle(

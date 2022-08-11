@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../models/notifications/search_changed_notification.dart';
+
 class SearchField extends StatefulWidget {
 
-
+  final TextEditingController controller;
 
   const SearchField({
     Key? key,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -13,9 +16,16 @@ class SearchField extends StatefulWidget {
 }
 
 class _SearchFieldState extends State<SearchField> {
+
+  SearchChangeNotification changeNotification = SearchChangeNotification();
+
   @override
   Widget build(BuildContext context) {
-    return const TextField(
+    return TextField(
+      controller: widget.controller,
+      onChanged: (input){
+        changeNotification.dispatch(context);
+      },
       maxLines: 1,
       expands: false,
       decoration: InputDecoration(
@@ -32,3 +42,4 @@ class _SearchFieldState extends State<SearchField> {
     );
   }
 }
+

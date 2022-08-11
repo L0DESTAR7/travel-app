@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:tourisme_app_ma/widgets/search_line.dart';
 
 
-
 class SearchBar extends StatelessWidget {
 
   final double xFactor;
   final double yFactor;
-  const SearchBar({Key? key,required this.xFactor,required this.yFactor}) : super(key: key);
+  final TextEditingController controller;
+  const SearchBar({Key? key,required this.xFactor,required this.yFactor,required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +35,7 @@ class SearchBar extends StatelessWidget {
           child: SearchContainer(
             xFactor: xFactor,
             yFactor: yFactor,
+            controller: controller,
           ),
         ),
       ]

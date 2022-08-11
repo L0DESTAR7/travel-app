@@ -5,11 +5,13 @@ import 'package:tourisme_app_ma/widgets/painters/search_icon_painter.dart';
 import 'search_field.dart';
 
 class SearchContainer extends StatelessWidget {
+
+  final TextEditingController controller;
   final double xFactor;
   final double yFactor;
 
   const SearchContainer(
-      {Key? key, required this.xFactor, required this.yFactor})
+      {Key? key, required this.xFactor, required this.yFactor, required this.controller})
       : super(key: key);
 
   @override
@@ -36,7 +38,9 @@ class SearchContainer extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.center,
                   width: 20,
-                  child: SearchField(),
+                  child: SearchField(
+                    controller: controller,
+                  ),
                 ))),
         SearchButton(xFactor: xFactor, yFactor: yFactor),
       ]),
