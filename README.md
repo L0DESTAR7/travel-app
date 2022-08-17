@@ -1,15 +1,13 @@
-# Projet-Stage-2022
-Application pour visualiser les agents de voyages et leurs informations.
+# Projet Stage 2022.
+Il s'agit d'une application mobile Android & iOS qui sert d'annuaire pour les agents de voyages au Maroc.
+Ce travail rentre dans le cadre d'un produit développé en stage auprès du Ministère du Tourisme, de l'Artisanat et de l'Economie Sociale et Solidaire (MTAESS).
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Fonctionnalités:
+  
+  * Annuaire extensif de toutes les agences de voyages enregistrés au Maroc (Plus de 1240 agent de voyage!).
+  * Système de filtrage et de recherche très rapide.
+  * Une bonne experience utilisateur avec une interface intuitif, moderne et animée!
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📷 Screenshots:
