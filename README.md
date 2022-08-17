@@ -6,7 +6,7 @@ Ce travail rentre dans le cadre d'un produit développé en stage auprès du Min
 
 ## 🚀 Fonctionnalités:
   
-  * Annuaire extensive de toutes les agences de voyages enregistrés au Maroc (Plus de 1240 agent de voyage!).
+  * Annuaire extensif de toutes les agences de voyages enregistrés au Maroc (Plus de 1240 agent de voyage!).
   * Système de filtrage et de recherche très rapide.
   * Une bonne experience utilisateur avec une interface intuitif, moderne et animée!
 
