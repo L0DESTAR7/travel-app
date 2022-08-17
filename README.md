@@ -13,4 +13,4 @@ Ce travail rentre dans le cadre d'un produit développé en stage auprès du Min
 ## 📷 Screenshots:
 
 
-  ![](showcase/Screens & Navigation.png)
+  ![](showcase/screens.png)
