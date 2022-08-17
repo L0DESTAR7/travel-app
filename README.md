@@ -1,4 +1,4 @@
-[![](showcase/FR_OFF.png)](README.fr.md)       [![](showcase/EN_ON.png)](README.md)
+[![](showcase/EN_ON.png)](README.md)                 [![](showcase/FR_OFF.png)](README.fr.md)
 # Projet Stage 2022.
 This project is an Android and iOS mobile app that serves as a directory of travel agencies in Morocco.
 This work is the end product of a Software engineering internship at the Ministry of Tourism, Handicrafts and Social and Solidarity Economy.
