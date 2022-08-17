@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:excel/excel.dart';
 import 'package:flutter/services.dart';
 import 'package:tourisme_app_ma/const/filter_values.dart';
@@ -44,7 +45,7 @@ class Initializer {
               adresse: row[2]?.value,
               tel: row[3]?.value,
               fax: row[4]?.value ?? "",
-              sanct: 0,
+              sanct: Random().nextInt(4),
               index: i));
 
           // This portion is for retrieving the unique values of province names.

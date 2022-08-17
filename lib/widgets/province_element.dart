@@ -36,11 +36,8 @@ class _ProvinceElementState extends State<ProvinceElement> {
         });
       },
       onTap: (){
-        print("CREATING FILTER OBJECT...");
         Filter provFilter = Filter(value: widget.provName, type: FilterType.provName);
-        print("FILTER OBJECT CREATED!");
-        print("SENDING FILTER OBJECT TO MAIN FILE...");
-        CreateProvNameFilterNotification filterNotification = CreateProvNameFilterNotification(provFilter);
+        CreateFilterNotification filterNotification = CreateFilterNotification(provFilter);
         filterNotification.dispatch(context);
       },
       child: Container(
@@ -49,7 +46,7 @@ class _ProvinceElementState extends State<ProvinceElement> {
         padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
         child: Text(
           widget.provName,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: "Michroma",
             color: mainDarkColor,
             fontSize: 16,

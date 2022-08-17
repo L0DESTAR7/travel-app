@@ -5,7 +5,7 @@ import 'package:tourisme_app_ma/const/color_const.dart';
 import 'package:tourisme_app_ma/const/filter_values.dart';
 import 'package:tourisme_app_ma/models/notifications/create_filter_notification.dart';
 import 'package:tourisme_app_ma/models/notifications/open_filter_menu_notification.dart';
-import 'package:tourisme_app_ma/widgets/filter_element.dart';
+import 'package:tourisme_app_ma/widgets/sanct_filter_element.dart';
 import 'package:tourisme_app_ma/widgets/painters/triangle_painter.dart';
 
 import '../province_element.dart';
@@ -37,17 +37,22 @@ class _AddFilterState extends State<AddFilter> {
     openFilterNotification.stateBool = openFilters;
   }
 
-  List<ProvinceElement> createProvinceElements(double width_,Color color_, Color selectedColor_){
-
+  List<ProvinceElement> createProvinceElements(
+      double width_, Color color_, Color selectedColor_) {
     List<ProvinceElement> provElementlist = [];
     FilterValuesProvider.provinces.forEach((element) {
-      provElementlist.add(ProvinceElement(width: width_, color: color_,selectedColor: selectedColor_,provName: element,));
+      provElementlist.add(ProvinceElement(
+        width: width_,
+        color: color_,
+        selectedColor: selectedColor_,
+        provName: element,
+      ));
     });
     return provElementlist;
   }
 
-  void closeFilters(){
-    setState((){
+  void closeFilters() {
+    setState(() {
       openFilters = !openFilters;
       openFilterNotification.stateBool = openFilters;
       openFilterNotification.dispatch(context);
@@ -83,8 +88,8 @@ class _AddFilterState extends State<AddFilter> {
               ),
             ),
           ),
-          NotificationListener<CreateProvNameFilterNotification>(
-            onNotification: (notification){
+          NotificationListener<CreateFilterNotification>(
+            onNotification: (notification) {
               closeFilters();
               return false;
             },
@@ -93,7 +98,8 @@ class _AddFilterState extends State<AddFilter> {
               width: widget.width / 2,
               height: widget.height - 10,
               decoration: BoxDecoration(
-                color: openFilters ? const Color(0x80F3FFFF) : Colors.transparent,
+                color:
+                    openFilters ? const Color(0x80F3FFFF) : Colors.transparent,
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
                   color: openFilters ? mainDarkColor : Colors.transparent,
@@ -105,21 +111,25 @@ class _AddFilterState extends State<AddFilter> {
                 filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                 child: openFilters
                     ? ListView(
-                        padding:
-                            const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 5),
                         children: openFilters
                             ? [
-                                FilterElement(
+                                SanctFilterElement(
                                   width: widget.width / 3,
-                                  title: "≤ 1 sanction",
+                                  maxSanct: 0,
                                 ),
-                                FilterElement(
+                                SanctFilterElement(
                                   width: widget.width / 3,
-                                  title: "≤ 2 sanctions",
+                                  maxSanct: 1,
                                 ),
-                                FilterElement(
+                                SanctFilterElement(
                                   width: widget.width / 3,
-                                  title: "≤ 3 sanctions",
+                                  maxSanct: 2,
+                                ),
+                                SanctFilterElement(
+                                  width: widget.width / 3,
+                                  maxSanct: 3,
                                 ),
                                 const SizedBox(
                                   height: 20,
@@ -157,7 +167,9 @@ class _AddFilterState extends State<AddFilter> {
                                           Triangle(width: 15, height: 10),
                                         ],
                                       ),
-                                      const SizedBox(height: 10,),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
                                       SizedBox(
                                         height: widget.height / 5.2,
                                         width: widget.width,
@@ -168,11 +180,15 @@ class _AddFilterState extends State<AddFilter> {
                                           radius: const Radius.circular(2),
                                           thumbVisibility: true,
                                           child: SingleChildScrollView(
-                                            controller: _provListScrollController,
+                                            controller:
+                                                _provListScrollController,
                                             child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: createProvinceElements(widget.width, Colors.transparent, const Color(
-                                                  0x80A8D8F3)),
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: createProvinceElements(
+                                                  widget.width,
+                                                  Colors.transparent,
+                                                  const Color(0x80A8D8F3)),
                                             ),
                                           ),
                                         ),
@@ -224,5 +240,3 @@ class LocalCustomPainter extends CustomPainter {
     return true;
   }
 }
-
-

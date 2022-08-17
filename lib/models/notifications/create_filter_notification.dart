@@ -3,9 +3,9 @@ import 'package:tourisme_app_ma/models/filter.dart';
 
 
 
-class CreateProvNameFilterNotification extends Notification{
+class CreateFilterNotification extends Notification{
 
   final Filter filter;
-  const CreateProvNameFilterNotification(this.filter);
+  const CreateFilterNotification(this.filter);
 
 }

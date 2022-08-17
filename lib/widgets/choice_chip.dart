@@ -11,6 +11,16 @@ class CustomChoiceChip extends StatelessWidget {
   const CustomChoiceChip({Key? key, required this.height, required this.width, required this.filter})
       : super(key: key);
 
+  String makeFilterTitle(Filter filter){
+
+    if (filter.type == FilterType.provName){
+      return (filter.value+" "*(filter.value.length + 2));
+    }
+
+
+    return "≤ ${filter.value} sanct.${"   "*(filter.value.length + 2)}";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -39,7 +49,7 @@ class CustomChoiceChip extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.only(left: 5),
               child: Text(
-                filter.value+" "*(filter.value.length + 2),
+                makeFilterTitle(filter),
                 style: TextStyle(
                   color: mainDarkColor,
                   fontFamily: "Michroma",

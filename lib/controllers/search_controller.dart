@@ -76,6 +76,9 @@ class SearchController {
   void applyFilters(){
     _seperateFilters();
     _reduceSanctFilters(_sanctFilters);
+    if (_sanctFilters.isEmpty){
+      _maxSanct = 100;
+    }
     filteredList = fullList.where((agentVoyage) {
       final bool check1 = (agentVoyage.sanct <= _maxSanct);
       final bool check2 = _provNameMatch(agentVoyage);
@@ -90,6 +93,9 @@ class SearchController {
   void _seperateFilters(){
     for (Filter filter in filters) {
       if (filter.type == FilterType.provName){
+        if (_provNameFilters.contains(filter)){
+          continue;
+        }
         _provNameFilters.add(filter);
       }
       else{
@@ -116,7 +122,7 @@ class SearchController {
     // Due to the fact that the filters list always has at least one filter of
     // type provName and of value "" (empty string), we have to skip the check
     // if the list contains one element (the empty string provName filter).
-    if (filters.length < 2){
+    if (_provNameFilters.length < 2){
       return true;
     }
     for (Filter filter in _provNameFilters){

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="smit.TourismeApp.tourisme_app_ma">
    <application
-        android:label="tourisme_app_ma"
+        android:label="Travel MA"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

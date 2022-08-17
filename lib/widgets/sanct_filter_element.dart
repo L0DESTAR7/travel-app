@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:tourisme_app_ma/const/color_const.dart';
+import 'package:tourisme_app_ma/models/filter.dart';
+import 'package:tourisme_app_ma/models/notifications/create_filter_notification.dart';
 import 'package:tourisme_app_ma/widgets/painters/filter_separator_painter.dart';
 
-class FilterElement extends StatefulWidget {
-  final String title;
+class SanctFilterElement extends StatefulWidget {
   final double width;
+  final int maxSanct;
 
-  FilterElement({Key? key, required this.title, required this.width})
+  const SanctFilterElement({Key? key, required this.width, required this.maxSanct})
       : super(key: key);
 
   @override
-  State<FilterElement> createState() => _FilterElementState();
+  State<SanctFilterElement> createState() => _SanctFilterElementState();
 }
 
-class _FilterElementState extends State<FilterElement> {
+class _SanctFilterElementState extends State<SanctFilterElement> {
   bool selected = false;
 
-  final Color selectedColor = Color(0xBDA6D8F3);
+  final Color selectedColor = const Color(0xBDA6D8F3);
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +29,18 @@ class _FilterElementState extends State<FilterElement> {
         GestureDetector(
           onTapDown: (details) {
             selected = true;
-            print(selected);
             setState(() {});
           },
           onTapUp: (details) {
             Future.delayed(const Duration(milliseconds: 100), () {
               selected = false;
-              print(selected);
               setState(() {});
             });
+          },
+          onTap: (){
+            Filter filter = Filter(type: FilterType.maxSanct, value: widget.maxSanct.toString());
+            CreateFilterNotification createMaxSanctFilterNotification = CreateFilterNotification(filter);
+            createMaxSanctFilterNotification.dispatch(context);
           },
           child: Container(
             color: selected ? selectedColor : Colors.transparent,
@@ -44,7 +49,7 @@ class _FilterElementState extends State<FilterElement> {
             child: FittedBox(
               fit: BoxFit.fitWidth,
               child: Text(
-                widget.title,
+                "≤ ${widget.maxSanct} sanction",
                 style: TextStyle(
                   fontFamily: "Michroma",
                   letterSpacing: 3,

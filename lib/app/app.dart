@@ -19,9 +19,6 @@ import 'package:tourisme_app_ma/widgets/painters/underliner_painter.dart';
 import 'package:tourisme_app_ma/widgets/spinning_decoration.dart';
 import 'package:tourisme_app_ma/controllers/search_controller.dart';
 
-
-
-
 class TourismApp extends StatefulWidget {
   final List<AgentVoyage> list;
   const TourismApp({Key? key, required this.list}) : super(key: key);
@@ -224,14 +221,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
           ),
           Positioned(
-            top: height * yFactor / 2.55,
+            top: height / 2.8,
             left: width * xFactor / 15,
             child: FiltersTitle(
               width: width,
             ),
           ),
           Positioned(
-            top: height / 2.6,
+            top: height / 2.55,
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
               clipBehavior: Clip.none,
@@ -242,18 +239,20 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   setState(() {
                     searchController.removeFilter(notification.filter);
                     searchController.applyFilters();
-                    if (_currentIndex > searchController.searchList.length-1){
+                    if (_currentIndex >
+                        searchController.searchList.length - 1) {
                       _currentIndex = 0;
                     }
                   });
                   return true;
                 },
-                child: NotificationListener<CreateProvNameFilterNotification>(
+                child: NotificationListener<CreateFilterNotification>(
                   onNotification: (notification) {
                     setState(() {
                       searchController.addFilter(notification.filter);
                       searchController.applyFilters();
-                      if (_currentIndex > searchController.searchList.length-1){
+                      if (_currentIndex >
+                          searchController.searchList.length - 1) {
                         _currentIndex = 0;
                       }
                     });
@@ -274,8 +273,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               setState(() {
                                 _showFilters = notification.stateBool;
                                 if (_showFilters) {
-                                } else {
-                                }
+                                } else {}
                               });
                               return true;
                             },
@@ -353,7 +351,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     height: height,
                     width: width,
                     agentVoyage: searchController.searchList.isNotEmpty
-                        ? searchController.searchList[_currentIndex]
+                        ? (_currentIndex < searchController.searchList.length
+                            ? searchController.searchList[_currentIndex]
+                            : searchController.searchList[0])
                         : defaultAgentVoyage,
                   ),
                 ),
@@ -365,3 +365,4 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     );
   }
 }
+
