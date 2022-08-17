@@ -1,4 +1,4 @@
-[![](showcase/EN.png)](README.fr.md)
+[![](showcase/EN.png)](README.md)
 # Projet Stage 2022.
 Il s'agit d'une application mobile Android & iOS qui sert d'annuaire pour les agents de voyages au Maroc.
 Ce travail s'inscrit dans le cadre d'un produit développé en stage auprès du Ministère du Tourisme, de l'Artisanat et de l'Economie Sociale et Solidaire (MTAESS).
