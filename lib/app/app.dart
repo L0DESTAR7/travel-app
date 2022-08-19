@@ -101,68 +101,73 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           Positioned(
               top: 30 * yFactor,
               left: 25 * xFactor,
-              child: Container(
-                width: 78 * xFactor,
-                height: 80 * yFactor,
-                decoration: BoxDecoration(
-                    color: const Color(0xfff1fcfd),
-                    borderRadius: BorderRadius.circular(21),
-                    boxShadow: [
-                      BoxShadow(
-                        color: genericShadowColor,
-                        offset: Offset(4 * xFactor, 4 * yFactor),
-                        blurRadius: 6,
+              child: Row(
+                children: [
+                  Container(
+                    width: 78 * xFactor,
+                    height: 80 * yFactor,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: const Color(0xfff1fcfd),
+                        borderRadius: BorderRadius.circular(21),
+                        boxShadow: [
+                          BoxShadow(
+                            color: genericShadowColor,
+                            offset: Offset(4 * xFactor, 4 * yFactor),
+                            blurRadius: 6,
+                          ),
+                          BoxShadow(
+                            color: const Color(0xFFFFFFFF),
+                            offset: Offset(-4 * xFactor, -4 * yFactor),
+                            blurRadius: 5,
+                          )
+                        ]),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 50 * xFactor,
+                          height: 50 * yFactor,
+                          child: Logo(width: width),
+                        ),
+                        const Text(
+                          "MAROC",
+                          style: TextStyle(
+                            color: Color(0xFF313131),
+                            fontSize: 10,
+                            letterSpacing: 2.5,
+                            fontFamily: "Gruppo",
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: width * xFactor / 30,),
+                  Column(
+                    children: [
+                      const Text(
+                        "AGENTS DE VOYAGES",
+                        style: TextStyle(
+                            color: mainDarkColor,
+                            fontFamily: "Michroma",
+                            fontSize: 14,
+                            letterSpacing: 3.57),
                       ),
-                      BoxShadow(
-                        color: const Color(0xFFFFFFFF),
-                        offset: Offset(-4 * xFactor, -4 * yFactor),
-                        blurRadius: 5,
-                      )
-                    ]),
+                      SizedBox(height: height * yFactor / 80,),
+                      const Underliner(width: 200),
+                    ],
+                  ),
+                ],
               )),
-          Positioned(
-            top: 35 * yFactor,
-            left: 40 * xFactor,
-            child: SizedBox(
-              width: 50 * xFactor,
-              height: 50 * yFactor,
-              child: Logo(width: width),
-            ),
-          ),
-          Positioned(
-              top: 92 * yFactor,
-              left: 40 * xFactor,
-              child: const Text(
-                "MAROC",
-                style: TextStyle(
-                  color: Color(0xFF313131),
-                  fontSize: 10,
-                  letterSpacing: 2.5,
-                  fontFamily: "Gruppo",
-                ),
-              )),
-          Positioned(
-            top: 50 * yFactor,
-            left: 120 * xFactor,
-            child: const Text(
-              "AGENTS DE VOYAGES",
-              style: TextStyle(
-                  color: mainDarkColor,
-                  fontFamily: "Michroma",
-                  fontSize: 14,
-                  letterSpacing: 3.57),
-            ),
-          ),
-          Positioned(
-            top: 80 * yFactor,
-            left: 150 * xFactor,
-            child: const Underliner(width: 200),
-          ),
           Positioned(
             top: 0.262 * height * yFactor -
                 (276 / 2), // Subtract distance to center of widget
             right: -125 * xFactor,
-            child: SpinningDecoration(width: width),
+            child: Row(
+              children: [
+                SpinningDecoration(width: width),
+              ],
+            ),
           ),
           Positioned(
             top: 0.2 * height * yFactor,
@@ -221,143 +226,149 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
           ),
           Positioned(
-            top: height / 2.8,
-            left: width * xFactor / 15,
-            child: FiltersTitle(
-              width: width,
-            ),
-          ),
-          Positioned(
-            top: height / 2.55,
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              clipBehavior: Clip.none,
-              width: width,
-              height: _showFilters ? height / 2.1 : height / 15,
-              child: NotificationListener<DeleteFilterNotification>(
-                onNotification: (notification) {
-                  setState(() {
-                    searchController.removeFilter(notification.filter);
-                    searchController.applyFilters();
-                    if (_currentIndex >
-                        searchController.searchList.length - 1) {
-                      _currentIndex = 0;
-                    }
-                  });
-                  return true;
-                },
-                child: NotificationListener<CreateFilterNotification>(
-                  onNotification: (notification) {
-                    setState(() {
-                      searchController.addFilter(notification.filter);
-                      searchController.applyFilters();
-                      if (_currentIndex >
-                          searchController.searchList.length - 1) {
-                        _currentIndex = 0;
-                      }
-                    });
-                    return true;
-                  },
-                  child: ScrollConfiguration(
-                    behavior: NoOverScrollBehaviour(),
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      controller: _filterScrollController,
-                      padding: EdgeInsets.only(left: width * xFactor / 10),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: searchController.filters.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        if (index == 0 || searchController.filters.isEmpty) {
-                          return NotificationListener<OpenFilterNotification>(
-                            onNotification: (notification) {
-                              setState(() {
-                                _showFilters = notification.stateBool;
-                                if (_showFilters) {
-                                } else {}
-                              });
-                              return true;
-                            },
-                            child: SizedBox(
-                                height: _showFilters ? height / 4 : 0,
-                                child: AddFilter(
-                                  width: _showFilters ? width : 0,
-                                  height: height,
-                                  plusSignWidth: width,
-                                )),
-                          );
+            top: 0.285 * height * yFactor + 90,
+            left: width * xFactor / 20,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FiltersTitle(
+                  width: width,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10,),
+                  clipBehavior: Clip.none,
+                  width: width,
+                  height: _showFilters ? height / 2.1 : height / 15,
+                  child: NotificationListener<DeleteFilterNotification>(
+                    onNotification: (notification) {
+                      setState(() {
+                        searchController.removeFilter(notification.filter);
+                        searchController.applyFilters();
+                        if (_currentIndex >
+                            searchController.searchList.length - 1) {
+                          _currentIndex = 0;
                         }
-                        return CustomChoiceChip(
-                          height: 32 * yFactor,
-                          width: 92 * xFactor,
-                          filter: searchController.filters[index],
-                        );
+                      });
+                      return true;
+                    },
+                    child: NotificationListener<CreateFilterNotification>(
+                      onNotification: (notification) {
+                        setState(() {
+                          searchController.addFilter(notification.filter);
+                          searchController.applyFilters();
+                          if (_currentIndex >
+                              searchController.searchList.length - 1) {
+                            _currentIndex = 0;
+                          }
+                        });
+                        return true;
                       },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(width: width * xFactor / 15);
-                      },
+                      child: ScrollConfiguration(
+                        behavior: NoOverScrollBehaviour(),
+                        child: ListView.separated(
+                          padding: EdgeInsets.only(right: 40 * xFactor),
+                          shrinkWrap: true,
+                          controller: _filterScrollController,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: searchController.filters.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            if (index == 0 || searchController.filters.isEmpty) {
+                              return NotificationListener<OpenFilterNotification>(
+                                onNotification: (notification) {
+                                  setState(() {
+                                    _showFilters = notification.stateBool;
+                                    if (_showFilters) {
+                                    } else {}
+                                  });
+                                  return true;
+                                },
+                                child: SizedBox(
+                                    height: _showFilters ? height / 4 : 0,
+                                    child: AddFilter(
+                                      width: _showFilters ? width : 0,
+                                      height: height,
+                                      plusSignWidth: width,
+                                    )),
+                              );
+                            }
+                            return CustomChoiceChip(
+                              height: 32 * yFactor,
+                              width: 92 * xFactor,
+                              filter: searchController.filters[index],
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return SizedBox(width: width * xFactor / 15);
+                          },
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
           ),
           Positioned(
             right: -5,
             top: 0.285 * height * yFactor,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Center(
-                  child: SizedBox(
-                    height: 80 * yFactor,
-                    child: NotificationListener<SearchChangeNotification>(
-                      onNotification: (notification) {
-                        setState(() {
-                          // TODO: PUT FILTER PARAMETER LOGIC HERE
-                          searchController
-                              .searchFor(_searchFieldController.text);
-                        });
-                        return true;
-                      },
-                      child: SearchBar(
-                        xFactor: xFactor,
-                        yFactor: yFactor,
-                        controller: _searchFieldController,
+            child: SizedBox(
+              width: width,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        height: 80 * yFactor,
+                        child: NotificationListener<SearchChangeNotification>(
+                          onNotification: (notification) {
+                            setState(() {
+                              // TODO: PUT FILTER PARAMETER LOGIC HERE
+                              searchController
+                                  .searchFor(_searchFieldController.text);
+                            });
+                            return true;
+                          },
+                          child: SearchBar(
+                            xFactor: xFactor,
+                            yFactor: yFactor,
+                            controller: _searchFieldController,
+                          ),
+                        ),
                       ),
+                    ],
+                  ),
+                  /// The purpose of this SizedBox is to force the InfoSlider
+                  /// widget to get as close to the SearchBar widget as possible.
+                  /// You can replace SizedBox with a Container and give it a color
+                  /// to see where exactly the hitbox of SearchBar ends.
+                  AnimatedSize(
+                    curve: Curves.linearToEaseOut,
+                    reverseDuration: const Duration(seconds: 1),
+                    duration: const Duration(seconds: 2),
+                    child: SizedBox(
+                      height: _showInfo ? 0 : height,
                     ),
                   ),
-                ),
-
-                /// The purpose of this SizedBox is to force the InfoSlider
-                /// widget to get as close to the SearchBar widget as possible.
-                /// You can replace SizedBox with a Container and give it a color
-                /// to see where exactly the hitbox of SearchBar ends.
-                AnimatedSize(
-                  curve: Curves.linearToEaseOut,
-                  reverseDuration: const Duration(seconds: 1),
-                  duration: const Duration(seconds: 2),
-                  child: SizedBox(
-                    height: _showInfo ? 0 : height,
+                  NotificationListener<PullDownNotification>(
+                    onNotification: (notification) {
+                      setState(() {
+                        _showInfo = false;
+                      });
+                      return true;
+                    },
+                    child: InfoSlider(
+                      height: height,
+                      width: width,
+                      agentVoyage: searchController.searchList.isNotEmpty
+                          ? (_currentIndex < searchController.searchList.length
+                              ? searchController.searchList[_currentIndex]
+                              : searchController.searchList[0])
+                          : defaultAgentVoyage,
+                    ),
                   ),
-                ),
-                NotificationListener<PullDownNotification>(
-                  onNotification: (notification) {
-                    setState(() {
-                      _showInfo = false;
-                    });
-                    return true;
-                  },
-                  child: InfoSlider(
-                    height: height,
-                    width: width,
-                    agentVoyage: searchController.searchList.isNotEmpty
-                        ? (_currentIndex < searchController.searchList.length
-                            ? searchController.searchList[_currentIndex]
-                            : searchController.searchList[0])
-                        : defaultAgentVoyage,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ]),
